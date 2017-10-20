@@ -3,7 +3,7 @@ $(function() {
     var $sendButton = $('#sendButton');
     $sendButton.click(function() {
         
-        var order_id = document.getElementById("order_id").value
+        var order_id = makeid()
         $.ajax({
             url: '/create_order',
             data: {"order_id": order_id},
@@ -22,5 +22,15 @@ $(function() {
         });
 
     })
-    
+
+    function makeid() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      
+        for (var i = 0; i < 10; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+      
+        return text;
+    }
+      
 })
