@@ -16,11 +16,13 @@ app.post('/test', (req, res, next) => {
     })
 })
 
-app.post('/linepay', (req, res, next) => {
+app.get('/linepay', (req, res, next) => {
     console.log(req.body);
+    console.log(req.query);
                                        
     return res.json({
-        "RESULT": req.body
+        "body": req.body,
+        "query":req.query
     })
 })
 
