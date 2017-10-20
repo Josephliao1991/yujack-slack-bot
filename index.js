@@ -16,7 +16,7 @@ app.post('/test', (req, res, next) => {
     })
 })
 
-app.post('/', (req, res, next) => {
+app.post('/linepay', (req, res, next) => {
     console.log(req.body);
                                        
     return res.json({
