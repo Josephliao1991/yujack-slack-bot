@@ -16,6 +16,14 @@ app.post('/test', (req, res, next) => {
     })
 })
 
+app.post('/', (req, res, next) => {
+    console.log(req.body);
+                                       
+    return res.json({
+        "RESULT": req.body
+    })
+})
+
 // heroku will set port via env PORT
 const port = process.env.PORT || 8080
 
