@@ -2,17 +2,17 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var request = require('request');
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({ extended: false }))
-    // app.use(bodyparser.urlencoded(
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+    // app.use(bodyParser.urlencoded(
     //   { extended: true,
     //     parameterLimit: 200, //Params Maxmin
     //     limit: 100*1024 //default 100k
     //   }))
 
 /* ::JSON:: http://jsonapi.org */
-app.use(bodyparser.json({ type: 'application/vnd.api+json' }))
-    // app.use(bodyparser.json(
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+    // app.use(bodyParser.json(
     // { type: 'application/vnd.api+json',
     //   parameterLimit: 200,  //Params Maxmin,
     //   limit:100*1024 //default 100k
