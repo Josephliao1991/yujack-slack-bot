@@ -40,14 +40,11 @@ app.get('/confirm_order', (req, res, next) => {
     
     confirmOrder(transactionId, function(err, result){
         console.log(result)
-        var transactionId = result.info.transactionId
-        var orderId = result.info.orderId
-        res.redirect(`/iframe_result.html?transactionId=${transactionId}&orderId=${orderId}`);
+        res.redirect('/result.html?transactionId=2017102100018961400&orderId=FS52410991');
     
     })
 
 })
-
 
 app.post('/create_order', (req, res, next) => {
     
