@@ -40,7 +40,7 @@ app.get('/confirm_order', (req, res, next) => {
     
     confirmOrder(transactionId, function(err, result){
         console.log(result)
-        res.redirect('/result.html?transactionId=2017102100018961400&orderId=FS52410991');
+        res.redirect(`/result.html?transactionId=${result.info.transactionId}&orderId=${result.info.orderId}`);
     
     })
 
