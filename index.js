@@ -43,7 +43,7 @@ app.get('/confirm_order', (req, res, next) => {
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
-        res.redirect(`/iframe_result.html?transactionId=${transactionId}&orderId=${orderId}`);
+        res.redirect(`/result.html?transactionId=${transactionId}&orderId=${orderId}`);
     
     })
 
@@ -57,7 +57,7 @@ app.get('/prod/confirm_order', (req, res, next) => {
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
-        res.redirect(`/iframe_result.html?transactionId=${transactionId}&orderId=${orderId}`);
+        res.redirect(`/prod/result.html?transactionId=${transactionId}&orderId=${orderId}`);
     
     })
 
@@ -67,7 +67,7 @@ app.get('/prod/cancel_order', (req, res, next) => {
     
     console.log(req.query)
     console.log(req.body)
-    res.redirect(`/iframe_result.html`);
+    res.redirect(`/prod/cancel.html`);
 
 })
 
