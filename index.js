@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 var request = require('request');
 const port = 80
+require('./process.env')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -38,7 +39,7 @@ app.get('/confirm_order', (req, res, next) => {
     
     var transactionId = req.query.transactionId
     
-    confirmOrder("SAND", transactionId, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", function(err, result){
+    confirmOrder("SAND", transactionId, process.env.sandbox_secret, process.env.sandbox_channel, function(err, result){
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
@@ -52,7 +53,7 @@ app.get('/prod/confirm_order', (req, res, next) => {
     
     var transactionId = req.query.transactionId
     
-    confirmOrder("PROD", transactionId, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", function(err, result){
+    confirmOrder("PROD", transactionId, process.env.prod_secret, process.env.prod_channel, function(err, result){
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
@@ -129,12 +130,12 @@ function reserveOrder(env, order_id, channel_id, channel_secret, path, callback)
         json: true,
         body: {
             "productName" : "TapPay X LinePay",
-            "amount" : 1,
+            "amount" : 10,
             "currency" : "TWD",
             "confirmUrl" : "https://linepay-test.tappaysdk.com"+path,
             "orderId" : order_id,
             "cancelUrl" : `https://linepay-test.tappaysdk.com/prod/cancel_order?orderId=${order_id}`,
-            "capture" : (env === "PROD") ?true :false
+            "capture" : (env === "PROD") ?false :true
         },
         headers: { "content-type": "application/json", "X-LINE-ChannelId":channel_id, "X-LINE-ChannelSecret":channel_secret }
     }
@@ -152,7 +153,7 @@ function confirmOrder(env, transaction_id, channel_id, channel_secret, callback)
         method: 'POST',
         json: true,
         body: {
-            "amount" : 1,
+            "amount" : 10,
             "currency" : "TWD"
         },
         headers: { "content-type": "application/json", "X-LINE-ChannelId":channel_id, "X-LINE-ChannelSecret":channel_secret }
