@@ -90,7 +90,7 @@ app.post('/create_order_tappay', (req, res, next) => {
     
     var order_id = req.body.order_id
     console.log(order_id)
-    reserveOrder(order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", "/confirm_order_tappay" function(err, result){
+    reserveOrder(order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", "/confirm_order_tappay", function(err, result){
         console.log("[1] reserveOrder")
         if(err) {
             console.log("[2] reserveOrder err")
