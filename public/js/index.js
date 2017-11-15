@@ -51,11 +51,12 @@ $(function() {
 
 
     function handleUrl(paymentUrl){
-        if(device_os === "iOS" || device_os === "Android") {
-            redirect(paymentUrl)        
-        }else {
-            openIframe(paymentUrl)
-        }
+        redirect(paymentUrl) 
+        // if(device_os === "iOS" || device_os === "Android") {
+        //     redirect(paymentUrl)        
+        // }else {
+        //     openIframe(paymentUrl)
+        // }
         
     }
         
