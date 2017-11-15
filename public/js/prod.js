@@ -51,7 +51,8 @@ $(function() {
 
 
     function handleUrl(paymentUrl){
-        redirect(paymentUrl) 
+        console.log(paymentUrl)
+        //redirect(paymentUrl) 
         // if(device_os === "iOS" || device_os === "Android") {
         //     redirect(paymentUrl)        
         // }else {
