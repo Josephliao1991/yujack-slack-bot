@@ -20,7 +20,8 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
     //   limit:100*1024 //default 100k
     // }))
 
-app.use('/', express.static(__dirname + "/public")) //serve static content
+app.use('/', express.static(__dirname + "/public/html")) //serve static content
+app.use('/js', express.static(__dirname + "/public/js")) //serve static content
 
 app.post('/test', (req, res, next) => {
     console.log(req.body);
