@@ -144,7 +144,7 @@ function reserveOrder(env, order_id, channel_id, channel_secret, path, callback)
 function confirmOrder(env, transaction_id, channel_id, channel_secret, callback) {
     
     let url = (env === "PROD") ?"https://api-pay.line.me" :"https://sandbox-api-pay.line.me"
-
+    console.log(url)
     var options = {
         url: `${url}/v2/payments/${transaction_id}/confirm`,
         method: 'POST',
