@@ -133,7 +133,7 @@ function reserveOrder(env, order_id, channel_id, channel_secret, path, callback)
             "currency" : "TWD",
             "confirmUrl" : "https://linepay-test.tappaysdk.com"+path,
             "orderId" : order_id,
-            "cancelUrl" : "https://linepay-test.tappaysdk.com"+path,
+            "cancelUrl" : "https://linepay-test.tappaysdk.com/prod/cancel_order",
             "capture" : (env === "PROD") ?true :false
         },
         headers: { "content-type": "application/json", "X-LINE-ChannelId":channel_id, "X-LINE-ChannelSecret":channel_secret }
