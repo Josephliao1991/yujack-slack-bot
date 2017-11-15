@@ -20,7 +20,8 @@ $(function() {
             dataType: 'json',
 
             success: function(result) {
-                handleUrl(result.paymentUrl)
+                console.log(result)
+                //handleUrl(result.paymentUrl)
             },
 
             error: function(xhr, ajaxOptions, thrownError) {
