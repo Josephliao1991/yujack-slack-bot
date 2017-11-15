@@ -121,7 +121,13 @@ app.listen(port)
 
 function reserveOrder(env, order_id, channel_id, channel_secret, path, callback) {
     
-    let url = (env === "PROD") ?"https://api-pay.line.me" :"https://sandbox-api-pay.line.me"
+    var url = ""
+    if(env == "PROD") {
+        url = "https://api-pay.line.me"
+    }else {
+        url = "https://sandbox-api-pay.line.me"
+    }
+
 
     var options = {
         url: `${env}/v2/payments/request`,
