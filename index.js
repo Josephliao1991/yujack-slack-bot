@@ -67,7 +67,7 @@ app.post('/create_order', (req, res, next) => {
     
     var order_id = req.body.order_id
     console.log(order_id)
-    reserveOrder(order_id, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", function(err, result){
+    reserveOrder(order_id, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", "/confirm_order", function(err, result){
         console.log("[1] reserveOrder")
         if(err) {
             console.log("[2] reserveOrder err")
@@ -90,7 +90,7 @@ app.post('/create_order_tappay', (req, res, next) => {
     
     var order_id = req.body.order_id
     console.log(order_id)
-    reserveOrder(order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", function(err, result){
+    reserveOrder(order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", "/confirm_order_tappay" function(err, result){
         console.log("[1] reserveOrder")
         if(err) {
             console.log("[2] reserveOrder err")
@@ -112,7 +112,7 @@ app.post('/create_order_tappay', (req, res, next) => {
 
 app.listen(port)
 
-function reserveOrder(order_id, channel_id, channel_secret, callback) {
+function reserveOrder(order_id, channel_id, channel_secret, path, callback) {
     
     console.log("[4] reserveOrder function")
     var options = {
@@ -123,7 +123,7 @@ function reserveOrder(order_id, channel_id, channel_secret, callback) {
             "productName" : "TapPay X LinePay",
             "amount" : 1,
             "currency" : "TWD",
-            "confirmUrl" : "https://linepay-test.tappaysdk.com/confirm_order",
+            "confirmUrl" : "https://linepay-test.tappaysdk.com"+path,
             "orderId" : order_id
         },
         headers: { "content-type": "application/json", "X-LINE-ChannelId":channel_id, "X-LINE-ChannelSecret":channel_secret }
