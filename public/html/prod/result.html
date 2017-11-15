@@ -16,13 +16,15 @@ A simple confirmation page.
 </head>
 
 <body>
-    <h2> Line Pay Test</h2>
-    <h3 type="text" value="Order ID : ---" id="order_id"></h3>
-    <button id='sendButton'>send</button>
+    <div class="payment-view">
+        <h2> Line Pay Success</h2>
+        <h3 type="text" value="Transaction ID : ---" id="result_transaction_id"></h3>
+        <h3 type="text" value="Order ID : ---" id="result_order_id"></h3>
+        <button id='returnButton'>return</button>
+    </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="js/ua-parser.js"></script>
-<script type="text/javascript" src="js/prod.js"></script>
+<script src="js/prod/result.js"></script>
 
 </html>
