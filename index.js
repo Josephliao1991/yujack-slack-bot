@@ -38,7 +38,7 @@ app.get('/confirm_order', (req, res, next) => {
     
     var transactionId = req.query.transactionId
     
-    confirmOrder(transactionId, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", function(err, result){
+    confirmOrder("SAND", transactionId, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", function(err, result){
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
@@ -48,11 +48,11 @@ app.get('/confirm_order', (req, res, next) => {
 
 })
 
-app.get('/confirm_order_tappay', (req, res, next) => {
+app.get('/prod/confirm_order', (req, res, next) => {
     
     var transactionId = req.query.transactionId
     
-    confirmOrder(transactionId, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", function(err, result){
+    confirmOrder("PROD", transactionId, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", function(err, result){
         console.log(result)
         var transactionId = result.info.transactionId
         var orderId = result.info.orderId
@@ -62,12 +62,19 @@ app.get('/confirm_order_tappay', (req, res, next) => {
 
 })
 
+app.get('/prod/cancel_order', (req, res, next) => {
+    
+    console.log(req.query)
+    console.log(req.body)
+    res.redirect(`/iframe_result.html`);
+
+})
 
 app.post('/create_order', (req, res, next) => {
     
     var order_id = req.body.order_id
     console.log(order_id)
-    reserveOrder(order_id, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", "/confirm_order", function(err, result){
+    reserveOrder("SAND", order_id, "1540179966", "bfd45f696e4421f39bb6d35f23475c3a", "/confirm_order", function(err, result){
         console.log("[1] reserveOrder")
         if(err) {
             console.log("[2] reserveOrder err")
@@ -86,11 +93,11 @@ app.post('/create_order', (req, res, next) => {
     })
 })
 
-app.post('/create_order_tappay', (req, res, next) => {
+app.post('/prod/create_order', (req, res, next) => {
     
     var order_id = req.body.order_id
     console.log(order_id)
-    reserveOrder(order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", "/confirm_order_tappay", function(err, result){
+    reserveOrder("PROD", order_id, "1546418144", "28851d36b969c0992e1db9f68b3f71e3", "/confirm_order_tappay", function(err, result){
         console.log("[1] reserveOrder")
         if(err) {
             console.log("[2] reserveOrder err")
@@ -112,11 +119,12 @@ app.post('/create_order_tappay', (req, res, next) => {
 
 app.listen(port)
 
-function reserveOrder(order_id, channel_id, channel_secret, path, callback) {
+function reserveOrder(env, order_id, channel_id, channel_secret, path, callback) {
     
-    console.log("[4] reserveOrder function")
+    let url = (env === "PROD") ?"https://api-pay.line.me" :"https://sandbox-api-pay.line.me"
+
     var options = {
-        url: 'https://sandbox-api-pay.line.me/v2/payments/request',
+        url: `${env}/v2/payments/request`,
         method: 'POST',
         json: true,
         body: {
@@ -133,10 +141,12 @@ function reserveOrder(order_id, channel_id, channel_secret, path, callback) {
     
 }
 
-function confirmOrder(transaction_id, channel_id, channel_secret, callback) {
+function confirmOrder(env, transaction_id, channel_id, channel_secret, callback) {
     
+    let url = (env === "PROD") ?"https://api-pay.line.me" :"https://sandbox-api-pay.line.me"
+
     var options = {
-        url: `https://sandbox-api-pay.line.me/v2/payments/${transaction_id}/confirm`,
+        url: `${url}/v2/payments/${transaction_id}/confirm`,
         method: 'POST',
         json: true,
         body: {

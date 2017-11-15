@@ -14,7 +14,7 @@ $(function() {
     $sendButton.click(function() {
         
         $.ajax({
-            url: '/create_order_tappay',
+            url: '/prod/create_order',
             data: {"order_id": order_id},
             type: "POST",
             dataType: 'json',
