@@ -20,8 +20,7 @@ $(function() {
             dataType: 'json',
 
             success: function(result) {
-                console.log(result)
-                //handleUrl(result.paymentUrl)
+                handleUrl(result.paymentUrl)
             },
 
             error: function(xhr, ajaxOptions, thrownError) {
@@ -52,8 +51,7 @@ $(function() {
 
 
     function handleUrl(paymentUrl){
-        console.log(paymentUrl)
-        //redirect(paymentUrl) 
+        redirect(paymentUrl) 
         // if(device_os === "iOS" || device_os === "Android") {
         //     redirect(paymentUrl)        
         // }else {
